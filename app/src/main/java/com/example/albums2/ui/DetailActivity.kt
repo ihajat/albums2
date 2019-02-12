@@ -13,7 +13,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val uri = intent.extras!!.getString("uri")
+        val uri = intent.extras!!.getString("title")
 
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)

@@ -1,6 +1,10 @@
 package com.example.albums2.ui
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.ViewAssertion
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
@@ -19,6 +23,16 @@ class AlbumListViewModelTest {
     @JvmField
     val rule = ActivityTestRule(AlbumListActivity::class.java)
 
+    fun isGone() = getViewAssertion(ViewMatchers.Visibility.GONE)
+
+    fun isVisible() = getViewAssertion(ViewMatchers.Visibility.VISIBLE)
+
+    fun isInvisible() = getViewAssertion(ViewMatchers.Visibility.INVISIBLE)
+
+    private fun getViewAssertion(visibility: ViewMatchers.Visibility): ViewAssertion? {
+        return ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(visibility))
+    }
+
     @Before
     fun setUp() {
     }
@@ -27,9 +41,17 @@ class AlbumListViewModelTest {
     fun tearDown() {
     }
 
-    // Test 1 :  Check that the total thumbnails is 15
+    // Test 1 :  Check that the total of albums is 100
     @Test
-    fun testTotalCountIsFifthteen() {
-        onView(withId(R.id.album_list)).check(withItemCount(15))
+    fun testTotalCountIs100() {
+        onView(withId(R.id.album_list)).check(withItemCount(100))
+    }
+
+    // Test 2 :  Check that on click, of album, inside the recyclerview, that
+    //          a second screen must load to show the title
+    @Test
+    fun testOnClickImageIsDisplayed() {
+        onView(withId(R.id.album_list)).perform(click())
+        onView(withId(R.id.details)).check(isVisible())
     }
 }

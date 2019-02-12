@@ -51,7 +51,7 @@ class AlbumListAdapter : RecyclerView.Adapter<AlbumListAdapter.ViewHolder>() {
                 override fun onClick() {
 
                     val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra("uri", binding.albumTitle.text.toString())
+                    intent.putExtra("title", binding.albumTitle.text.toString())
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(intent)
                 }
