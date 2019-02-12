@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Albums2</string>
+    <string name="album_error">album error</string>
+    <string name="retry">retry</string>
+</resources>
